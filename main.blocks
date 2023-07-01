@@ -1,0 +1,26 @@
+<xml xmlns="https://developers.google.com/blockly/xml"><block type="device_forever" id="C!$[|Rr^|[`AtJ=G[L}i" x="0" y="0"><comment pinned="false" h="643" w="343">
+
+Press Button A to display the current soil moisture level.
+
+
+Always check the soil moisture level. 
+If the soil moisture is greater than 650 (i.e. soil is dry) then...
+
+light up RGB pixels on REKA:BIT in RED,
+
+show "sad" icon, and
+
+activate the water pump (M2) to pump water 
+
+keep it running for 5 seconds 
+
+and then stop the pump.
+
+
+else (i.e. soil is moist), 
+
+light up RGB pixels on REKA:BIT in GREEN
+
+show "happy" icon
+
+</comment><statement name="HANDLER"><block type="controls_if" id="AUVdzR#mf#Ve6}n^qaKc"><value name="IF0"><shadow type="logic_boolean"><field name="BOOL">TRUE</field></shadow><block type="device_get_button2" id="rG?Josz$s8z65J1SWg6M"><field name="NAME">Button.A</field></block></value><statement name="DO0"><block type="device_show_number" id="]p?#|QPbPXn*=e;*7.uS"><value name="number"><shadow type="math_number"><field name="NUM">0</field></shadow><block type="soil_moisture_level" id="vOK([hH@^n@G3CQmc{:="><field name="pin">RekabitAnalogInPin.P2</field></block></value><next><block type="controls_if" id="A;]mw=ADiBFhq2Lef!V#"><mutation else="1"></mutation><value name="IF0"><shadow type="logic_boolean"><field name="BOOL">TRUE</field></shadow><block type="soil_moisture_compare_value" id="J0-f:X!nwdd~|hCt#8=V"><field name="pin">RekabitAnalogInPin.P2</field><field name="compareType">RekabitAnalogCompareType.MoreThan</field><value name="threshold"><shadow type="math_number_minmax" id="3mPa?GRA.n?@xP=_*it4"><mutation min="0" max="1023" label="Threshold" precision="0"></mutation><field name="SLIDER">650</field></shadow></value></block></value><statement name="DO0"><block type="rekabit_set_all_rgb_pixels_color" id="I[6n+OH;Y*y^-p7%O^3L"><value name="color"><shadow type="colorNumberPicker" id="jwQ%})7D0ee6k=QiY}?S"><field name="value">0xff0000</field></shadow></value><next><block type="rekabit_run_motor" id="Q~Z.NL,Twgq!2h7KZ:F5"><field name="motor">MotorChannel.M2</field><field name="direction">MotorDirection.Forward</field><value name="speed"><shadow type="math_number_minmax" id="OGQ8RfTsF9J1M8tT4uIj"><mutation min="0" max="255" label="Speed" precision="0"></mutation><field name="SLIDER">128</field></shadow></value><next><block type="device_pause" id="|*0zH4fys*CXhl4P(xpW"><value name="pause"><shadow type="timePicker" id="@geE=R|vdcJ;Rd9XK#`r"><field name="ms">5000</field></shadow></value><next><block type="rekabit_brake_motor" id="D=g?6Lc6PxYsqkpi:Cdz"><field name="motor">MotorChannel.M2</field><next><block type="basic_show_icon" id="aXlC)Lj:+wE7sw(9SK`D"><field name="i">IconNames.Sad</field></block></next></block></next></block></next></block></next></block></statement><statement name="ELSE"><block type="rekabit_set_all_rgb_pixels_color" id="(*xKd$nhkKrZ5t)kg54e"><value name="color"><shadow type="colorNumberPicker" id="X.FutJo7/6M$M:EK||Jr"><field name="value">0x00ff00</field></shadow></value><next><block type="basic_show_icon" id="dX^]FYMPw21P`tHga;u/"><field name="i">IconNames.Happy</field></block></next></block></statement></block></next></block></statement></block></statement></block></xml>
